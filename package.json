@@ -1,0 +1,31 @@
+{
+  "name": "node-denmark",
+  "version": "1.0.0",
+  "description": "Node.js webserver for benchmarking and testing downstream infrstructure that deals with node.js services",
+  "main": "denmark.js",
+  "bin": {
+    "node-denmark": "denmark.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raadad/node-denmark.git"
+  },
+  "keywords": [
+    "benchmarking",
+    "performance",
+    "testing",
+    "load",
+    "webserver",
+    "web",
+    "http"
+  ],
+  "author": "Raadad Elsleiman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raadad/node-denmark/issues"
+  },
+  "homepage": "https://github.com/raadad/node-denmark"
+}
