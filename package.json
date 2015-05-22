@@ -1,6 +1,6 @@
 {
   "name": "denmark",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node.js webserver for benchmarking and testing downstream infrstructure that deals with node.js services",
   "main": "denmark.js",
   "bin": {
