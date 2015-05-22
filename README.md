@@ -1,58 +1,31 @@
-# Din
-Razor thin Dependency Injection for node.js
-
+# Denmark
+Node.js webserver for benchmarking and testing downstream infrstructure that deals with node.js services
 ### Why?
-This library helps you achieve and enforce true inversion of control of your modules.
+This allows you to test how your downstream infrastructure is able to handle the load of your expected application in areas such as payload and latency.
 
-Using require to load modules directly makes it difficult to control what dependencies your modules use and when it comes time for testing or swapping out implementations of dependencies, it becomes difficult without having to change the module internally or hack the require cache.
-
-This library aims to be as thin as possible as well as completley unobtrusive to the modules themselevs, as opposed to most DI libraries which require modules are written in a specific way or depend on a global variable such as 'define'.
+### Install
+    npm install denmark -g
 
 ### Usage
-Din is constructed with a config, which is used to specify what dependencies each module requires and how a module should be loaded, there are multiple ways to load a dependency, depending on the requirment.
+    bash> denmark
+
+This will start a clustered webserver listening on port 3000 by default
+
+### Url Configuration
+    http://{host}:{port}/?latmin=100&latmax=1000&paymin=1024&paymax=2048
+This url will generate a response from a server with a random latency between 100ms and 1000ms that has a random payload size between 1024kb and 2048kb
+
+    http://{host}:{port}/?latmin=100&paymin=1024
+This url will generate a response from a server with 100ms latency and 1024kb payload size
+
+### Server Configuration
+Denmark can be configured via the following environment variables:
+
+* NODE_PORT=3000 - will listen for requests on port 3000
+* NODE_CPU=10 - will run 10 processes
 
 
-The following example shows how to load multiple dependencies in many supported usage scenarios.
 
-#### Example module - lib/testModule.js
-```javscript
-module.exports =  function(normalModule, computed, inlineFunction, string, number) {
-        console.log(arguments);
-}
-```
 
-#### App module wiring config - wiring.js
-```javscript
-module.exports = {
-        baseDir : __dirname, //alternative to relative path names
-        graph : {
-            'modulea' :{  // key used to load module
-                lookup:'lib/testModule',  //actual name of js file
-                deps:[ // array containing dependencies required to load module
-                    'n:console', // n denotes it is a normal module that can be required
-                    'j:computedDep', // j denotes a lookup in the evals object (shown below)
-                    function() {console.log('inlineFunctionDep'); // functions can be inlined as dependencies
-                    's:stringDep', // s dentoes a string literal
-                    123456, // numbers are passed straight through
-                    'd:libAnotherTestModule' // d denotes the loading of another module through the din library
-                    }
-                ]
-            },
-            'lib/anotherTestModule' :{  // modules dont require lookup if their keys match an actual file
-                deps:['n:fs'] }
-        },
-        evals: {
-            'computedDep': function(name) { return require('fs').readFileSync; }
-            // will return a reference to readFileSync as a Dependency
-        }
-};
-```
-#### Load DI - app.js
-```javscript
-var Din = require('../din'),
-appWiring = require('./wiring'), // config
-din = Din(appWiring),
 
-modulea = din.load('modulea');
-```
 
