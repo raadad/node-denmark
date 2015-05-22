@@ -4,7 +4,7 @@
   "description": "Node.js webserver for benchmarking and testing downstream infrstructure that deals with node.js services",
   "main": "denmark.js",
   "bin": {
-    "denmark": "denmark.js"
+    "denmark": "bin/denmark.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
