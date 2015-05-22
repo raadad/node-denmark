@@ -1,10 +1,10 @@
 {
   "name": "denmark",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node.js webserver for benchmarking and testing downstream infrstructure that deals with node.js services",
   "main": "denmark.js",
   "bin": {
-    "node-denmark": "denmark.js"
+    "denmark": "denmark.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
